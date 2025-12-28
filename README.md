@@ -1,7 +1,8 @@
-# Global Crypto Prediction Dashboard
+# MarketIQ India
 
-An AI-powered cryptocurrency price prediction system using Transformer neural networks with quantile regression for probabilistic forecasting.
+MarketIQ India is an AI-powered Indian stock market prediction and analytics platform that uses quantile regression–based deep learning models to generate probabilistic price forecasts, expected returns, and risk-aware insights for NSE-listed equities.
 
+The system combines machine learning, financial analytics, and a modern React dashboard to provide traders, analysts, and researchers with transparent, interpretable predictions.
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)
@@ -11,8 +12,8 @@ An AI-powered cryptocurrency price prediction system using Transformer neural ne
 
 - **AI-Powered Predictions**: Transformer-based deep learning model for price forecasting
 - **Quantile Regression**: Probabilistic predictions with confidence intervals (Q10, Q50, Q90)
-- **Multi-Coin Support**: Predict prices for hundreds of cryptocurrencies
-- **Real-Time Data**: Integration with CoinGecko API for live prices
+- **Multi-Asset Support**: Predict prices for hundreds of assets
+- **Real-Time Data**: Integration with various APIs for live prices
 - **Risk Analytics**: VaR, CVaR, Sharpe ratio, and volatility metrics
 - **Explainable AI**: SHAP values for model interpretability
 - **Interactive Dashboard**: Beautiful React-based UI with charts and visualizations
@@ -36,9 +37,9 @@ An AI-powered cryptocurrency price prediction system using Transformer neural ne
     ┌────┴────┐
     │         │
 ┌───▼──┐  ┌──▼────┐
-│ Model│  │CoinGecko│
-│  AI  │  │  API   │
-└──────┘  └────────┘
+│ Model│  │       │
+│  AI  │  │  APIs │
+└──────┘  └───────┘
 ```
 
 ### Tech Stack
@@ -69,8 +70,8 @@ An AI-powered cryptocurrency price prediction system using Transformer neural ne
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/crypto-prediction-dashboard.git
-cd crypto-prediction-dashboard
+git clone https://github.com/Somaskandan931/crypto-prediction-dashboard.git
+cd asset-prediction-dashboard
 ```
 
 ### 2. Backend Setup
@@ -166,33 +167,20 @@ Dashboard will open at: `http://localhost:3000`
 
 ### Core Endpoints
 
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| GET | `/` | Health check |
-| GET | `/coins` | List all available coins |
-| GET | `/predict/{coin}` | Get price predictions |
-| GET | `/live/{coin}` | Get current live price |
-| GET | `/risk/{coin}` | Get risk metrics |
-| GET | `/explain/{coin}` | Get SHAP explanations |
-| GET | `/importance/{coin}` | Get feature importance |
-| POST | `/retrain/{coin}` | Retrain model for specific coin |
-| POST | `/retrain-all` | Retrain entire model |
+| Method | Endpoint             | Description |
+|--------|----------------------|-------------|
+| GET | `/`                  | Health check |
+| GET | `/assets`            | List all available coins |
+| GET | `/predict/{assets}`  | Get price predictions |
+| GET | `/live/{assets}`       | Get current live price |
+| GET | `/risk/{assets}`       | Get risk metrics |
+| GET | `/explain/{assets}`    | Get SHAP explanations |
+| GET | `/importance/{assets}` | Get feature importance |
+| POST | `/retrain/{assets}`    | Retrain model for specific coin |
+| POST | `/retrain-all`       | Retrain entire model |
 
-### Example API Calls
 
-```bash
-# Get predictions for Bitcoin
-curl http://localhost:8000/predict/bitcoin
 
-# Get all available coins
-curl http://localhost:8000/coins
-
-# Get risk metrics
-curl http://localhost:8000/risk/ethereum
-
-# Trigger retraining
-curl -X POST http://localhost:8000/retrain/bitcoin
-```
 
 ### Example Response
 
@@ -207,53 +195,6 @@ curl -X POST http://localhost:8000/retrain/bitcoin
 }
 ```
 
-## Project Structure
-
-```
-crypto-prediction-dashboard/
-│
-├── backend/
-│   ├── data/
-│   │   └── fetch_data.py          # Data collection script
-│   │
-│   ├── model/
-│   │   ├── model.py                # Neural network architectures
-│   │   ├── dataset.py              # Data preprocessing
-│   │   ├── train_model.py          # Training script
-│   │   ├── metrics.py              # Evaluation metrics
-│   │   └── saved/                  # Trained models
-│   │
-│   ├── services/
-│   │   ├── predictor.py            # Prediction service
-│   │   ├── coins.py                # Coin management
-│   │   ├── retrain.py              # Retraining service
-│   │   ├── live_price.py           # Live price fetching
-│   │   └── risk_metrics.py         # Risk calculations
-│   │
-│   ├── explainability/
-│   │   └── shap_explainer.py       # SHAP explanations
-│   │
-│   └── main.py                     # FastAPI application
-│
-├── frontend/
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── CoinDropdown.js     # Coin selector
-│   │   │   ├── CryptoTable.js      # Data table
-│   │   │   ├── PredictionCard.js   # Prediction display
-│   │   │   └── PriceChart.js       # Chart component
-│   │   │
-│   │   ├── pages/
-│   │   │   └── Dashboard.js        # Main dashboard
-│   │   │
-│   │   └── api/
-│   │       └── cryptoApi.js        # API client
-│   │
-│   └── package.json
-│
-├── requirements.txt                # Python dependencies
-└── README.md                       # This file
-```
 
 ## Model Details
 
@@ -303,7 +244,7 @@ The system calculates comprehensive risk metrics:
 - **Sharpe Ratio**: Risk-adjusted return metric
 - **Maximum Drawdown**: Largest peak-to-trough decline
 
-## 🔧 Configuration
+## Configuration
 
 ### Modify Data Collection
 
@@ -331,7 +272,7 @@ model = build_transformer(
 )
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Issue: Model not found
 ```bash
@@ -384,7 +325,7 @@ build/
 - **Model Size**: ~50-100MB
 
 
-## 🙏 Acknowledgments
+## Acknowledgments
 
 - [CoinGecko API](https://www.coingecko.com/en/api) for cryptocurrency data
 - [TensorFlow](https://www.tensorflow.org/) for deep learning framework
