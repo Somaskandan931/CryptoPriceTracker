@@ -71,7 +71,7 @@ The system combines machine learning, financial analytics, and a modern React da
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Somaskandan931/crypto-prediction-dashboard.git
+git clone [https://github.com/Somaskandan931/MarketIQ](https://github.com/Somaskandan931/MarketIQ).git
 cd asset-prediction-dashboard
 ```
 
@@ -135,7 +135,7 @@ python backend/data/fetch_data.py
 python backend/model/train_model.py
 ```
 
-**Expected time**: 20-60 minutes depending on data size and hardware.
+**Expected time**: 20-60 minutes, depending on data size and hardware.
 
 **Output files:**
 - `backend/model/saved/crypto_transformer.keras`
