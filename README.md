@@ -127,7 +127,7 @@ npm install recharts axios
 python backend/data/fetch_data.py
 ```
 
-⏱️ **Note**: This will take several hours to fetch data for all coins due to API rate limits. Consider modifying the script to fetch only top 100 coins for testing.
+⏱️ **Note**: This will take several hours to fetch data for all assets due to API rate limits. Consider modifying the script to fetch only top 100 assets for testing.
 
 ### Step 2: Train the Model
 
@@ -171,7 +171,7 @@ Dashboard will open at: `http://localhost:3000`
 | Method | Endpoint             | Description |
 |--------|----------------------|-------------|
 | GET | `/`                  | Health check |
-| GET | `/assets`            | List all available coins |
+| GET | `/assets`            | List all available assets |
 | GET | `/predict/{assets}`  | Get price predictions |
 | GET | `/live/{assets}`       | Get current live price |
 | GET | `/risk/{assets}`       | Get risk metrics |
@@ -252,9 +252,9 @@ The system calculates comprehensive risk metrics:
 Edit `backend/data/fetch_data.py`:
 
 ```python
-# Fetch only top 100 coins
+# Fetch only top 100 assets
 DAYS = 30  # Historical days to fetch
-coins = get_all_coin_ids()[:100]  # Limit to 100 coins
+assets = get_all_coin_ids()[:100]  # Limit to 100 assets
 ```
 
 ### Adjust Model Parameters
@@ -264,7 +264,7 @@ Edit `backend/model/model.py`:
 ```python
 model = build_transformer(
     seq_len=30,        # Sequence length
-    num_coins=100,     # Number of coins
+    num_assets=100,     # Number of assets
     d_model=128,       # Model dimension
     num_heads=4,       # Attention heads
     ff_dim=256,        # Feedforward dimension
