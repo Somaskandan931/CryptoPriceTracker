@@ -328,7 +328,12 @@ build/
 
 ## Acknowledgments
 
-- [CoinGecko API](https://www.coingecko.com/en/api) for cryptocurrency data
-- [TensorFlow](https://www.tensorflow.org/) for deep learning framework
-- [FastAPI](https://fastapi.tiangolo.com/) for the web framework
-- [React](https://reactjs.org/) for the frontend framework
+- [Yahoo Finance](https://finance.yahoo.com/) and the [yfinance](https://github.com/ranaroussi/yfinance) library for providing historical data on Indian equities, indices, currencies, and commodities used for model training and evaluation.
+- [CoinGecko API](https://www.coingecko.com/en/api) for cryptocurrency market data and historical price information used during earlier stages and comparative analysis.
+- [TensorFlow](https://www.tensorflow.org/) and [Keras](https://keras.io/) for building and training deep learning models with quantile regression.
+- [FastAPI](https://fastapi.tiangolo.com/) for developing a high-performance and scalable RESTful backend API.
+- [React](https://reactjs.org/) for building the interactive and user-friendly frontend dashboard.
+- [SHAP (SHapley Additive exPlanations)](https://shap.readthedocs.io/en/latest/) for enabling explainable AI and improving transparency in model predictions.
+- [Alpha Vantage](https://www.alphavantage.co/) and [Twelve Data](https://twelvedata.com/) as optional supplementary data sources for financial and commodity market data.
+- The open-source Python ecosystem, including [Pandas](https://pandas.pydata.org/), [NumPy](https://numpy.org/), and [Scikit-learn](https://scikit-learn.org/), for data preprocessing, feature engineering, and analysis.
+
