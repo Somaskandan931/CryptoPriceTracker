@@ -3,6 +3,7 @@
 MarketIQ India is an AI-powered Indian stock market prediction and analytics platform that uses quantile regression–based deep learning models to generate probabilistic price forecasts, expected returns, and risk-aware insights for NSE-listed equities.
 
 The system combines machine learning, financial analytics, and a modern React dashboard to provide traders, analysts, and researchers with transparent, interpretable predictions.
+
 ![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)
