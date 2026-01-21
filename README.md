@@ -1,222 +1,249 @@
 # MarketIQ India
 
-MarketIQ India is an AI-powered Indian stock market prediction and analytics platform that uses quantile regression–based deep learning models to generate probabilistic price forecasts, expected returns, and risk-aware insights for NSE-listed equities.
+### AI-Powered Multi-Asset Price Prediction Platform for Indian Markets
 
-The system combines machine learning, financial analytics, and a modern React dashboard to provide traders, analysts, and researchers with transparent, interpretable predictions.
-![Python](https://img.shields.io/badge/Python-3.8+-blue.svg)
-![TensorFlow](https://img.shields.io/badge/TensorFlow-2.x-orange.svg)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.100+-green.svg)
-![React](https://img.shields.io/badge/React-18.x-61dafb.svg)
+MarketIQ India is an **AI-powered price prediction and risk analytics platform** for **Indian stocks, indices, commodities, currencies, and cryptocurrencies**, built using **Transformer-based quantile regression models**.
+
+The system provides **probabilistic forecasts (Q10, Q50, Q90)**, **risk metrics**, and **explainable AI insights**, delivered via a **FastAPI backend** and an **interactive React dashboard**.
+
+---
+
+## Key Highlights
+
+* **Transformer-based deep learning model**
+* **Quantile regression** for uncertainty-aware predictions
+* **Indian market focus** (NSE stocks, indices, INR pairs)
+* **Crypto + commodities support**
+* **Risk analytics** (VaR, CVaR, Sharpe, volatility)
+* **Explainable AI (SHAP)**
+* **Production-ready REST API**
+* **Modern React dashboard**
+
+---
 
 ## Features
 
-- **AI-Powered Predictions**: Transformer-based deep learning model for price forecasting
-- **Quantile Regression**: Probabilistic predictions with confidence intervals (Q10, Q50, Q90)
-- **Multi-Asset Support**: Predict prices for hundreds of assets
-- **Real-Time Data**: Integration with various APIs for live prices
-- **Risk Analytics**: VaR, CVaR, Sharpe ratio, and volatility metrics
-- **Explainable AI**: SHAP values for model interpretability
-- **Interactive Dashboard**: Beautiful React-based UI with charts and visualizations
-- **RESTful API**: Fast and scalable FastAPI backend
+* **AI Price Forecasting**: Transformer model for time-series prediction
+* **Probabilistic Outputs**: Q10 / Q50 / Q90 confidence bands
+* **Multi-Asset Coverage**:
 
-## Architecture
+  * Indian stocks & indices
+  * Cryptocurrencies
+  * Gold, Silver, Crude Oil
+  * Forex (USD/INR, EUR/INR, GBP/INR)
+* **Risk Analytics**:
+
+  * Value at Risk (VaR)
+  * Conditional VaR (CVaR)
+  * Volatility
+  * Sharpe Ratio
+  * Max Drawdown
+* **Explainability**:
+
+  * SHAP-based feature importance
+* **Interactive Dashboard**:
+
+  * Charts, confidence intervals, risk views
+* **RESTful API**:
+
+  * Prediction, risk, explainability, retraining
+
+---
+
+## System Architecture
 
 ```
-┌─────────────────┐
-│  React Frontend │
-│   (Port 3000)   │
-└────────┬────────┘
+┌──────────────────┐
+│  React Frontend  │
+│  (Port: 3000)    │
+└────────┬─────────┘
+         │ REST API
+┌────────▼─────────┐
+│ FastAPI Backend  │
+│ (Port: 8000)     │
+└────────┬─────────┘
          │
-         │ HTTP/REST
+ ┌───────▼────────┐
+ │ Transformer AI │
+ │  Quantile Model│
+ └───────┬────────┘
          │
-┌────────▼────────┐
-│  FastAPI Backend│
-│   (Port 8000)   │
-└────────┬────────┘
-         │
-    ┌────┴────┐
-    │         │
-┌───▼──┐  ┌──▼────┐
-│ Model│  │       │
-│  AI  │  │  APIs │
-└──────┘  └───────┘
+ ┌───────▼────────┐
+ │ Market Data    │
+ │ APIs & CSVs    │
+ └────────────────┘
 ```
 
-### Tech Stack
+---
 
-**Backend:**
-- Python 3.8+
-- TensorFlow 2.x
-- FastAPI
-- Pandas, NumPy, Scikit-learn
-- SHAP for explainability
+## Tech Stack
 
-**Frontend:**
-- React 18
-- Recharts for visualization
-- Tailwind CSS
-- Axios for API calls
+### Backend
 
-## Prerequisites
+* Python 3.8+
+* TensorFlow 2.x
+* FastAPI
+* Pandas, NumPy, Scikit-learn
+* SHAP
+* Joblib
 
-- Python 3.8 or higher
-- Node.js 14 or higher
-- npm or yarn
-- 8GB+ RAM (for model training)
-- GPU (optional, but recommended for faster training)
+### Frontend
 
-## Installation
+* React 18
+* Recharts
+* Tailwind CSS
+* Axios
 
-### 1. Clone the Repository
+---
+
+## Data Sources
+
+### Cryptocurrency Data
+
+* **Source**: CoinGecko API
+* **Coverage**: Top 50+ cryptocurrencies
+* **Data**: OHLCV, historical prices (90 days)
+* **Rate Limit**: 10,000 calls/month
 
 ```bash
-git clone https://github.com/Somaskandan931/crypto-prediction-dashboard.git
-cd asset-prediction-dashboard
+python fetch_data.py
 ```
 
-### 2. Backend Setup
+---
+
+### Indian Stock Market Data
+
+* **Source**: Yahoo Finance (yfinance)
+* **Coverage**:
+
+  * Indices: Nifty 50, Bank Nifty, Sensex
+  * Stocks: IT, Banking, Energy, Auto, Pharma, FMCG, Metals
+* **Assets**: 45+ NSE-listed stocks
 
 ```bash
-# Create virtual environment
+python fetch_indian_market_data.py
+```
+
+---
+
+### Commodities & Precious Metals
+
+* **Source**: Yahoo Finance Futures
+* **Assets**:
+
+  * Gold (GC=F)
+  * Silver (SI=F)
+  * Crude Oil (CL=F)
+* **Backup APIs**:
+
+  * Alpha Vantage
+  * Twelve Data
+
+```bash
+python fetch_metals_data.py
+```
+
+---
+
+### Currency Exchange Rates
+
+* **Source**: Yahoo Finance
+* **Pairs**:
+
+  * USD/INR
+  * EUR/INR
+  * GBP/INR
+
+---
+
+## Data Storage Structure
+
+```
+backend/data/
+├── bitcoin/
+│   └── bitcoin.csv
+├── ethereum/
+├── gold/
+├── silver/
+├── nifty50/
+├── reliance/
+└── ... (50+ assets)
+```
+
+Each dataset contains:
+
+* `timestamp`
+* `Open`
+* `High`
+* `Low`
+* `Close`
+* `Volume`
+
+---
+
+## Setup & Installation
+
+### Backend Setup
+
+```bash
 python -m venv venv
+source venv/bin/activate   # Linux / macOS
+venv\Scripts\activate      # Windows
 
-# Activate virtual environment
-# On Windows:
-venv\Scripts\activate
-# On macOS/Linux:
-source venv/bin/activate
-
-# Install Python dependencies
 pip install -r requirements.txt
 ```
 
-**Create `requirements.txt`:**
-```txt
-tensorflow>=2.10.0
-fastapi>=0.100.0
-uvicorn[standard]>=0.23.0
-pandas>=1.5.0
-numpy>=1.23.0
-scikit-learn>=1.2.0
-joblib>=1.2.0
-requests>=2.28.0
-python-multipart>=0.0.6
-shap>=0.42.0
-tqdm>=4.65.0
-```
+---
 
-### 3. Frontend Setup
+### Frontend Setup
 
 ```bash
 cd frontend
-
-# Install dependencies
 npm install
-
-# Required packages
-npm install recharts axios
-```
-
-## Usage
-
-### Step 1: Fetch Historical Data
-
-```bash
-# From project root
-python backend/data/fetch_data.py
-```
-
-⏱️ **Note**: This will take several hours to fetch data for all coins due to API rate limits. Consider modifying the script to fetch only top 100 coins for testing.
-
-### Step 2: Train the Model
-
-```bash
-python backend/model/train_model.py
-```
-
-**Expected time**: 20-60 minutes depending on data size and hardware.
-
-**Output files:**
-- `backend/model/saved/crypto_transformer.keras`
-- `backend/model/saved/scaler.pkl`
-- `backend/model/saved/coin_encoder.pkl`
-
-### Step 3: Start Backend API
-
-```bash
-# Option 1: Direct Python
-python backend/main.py
-
-# Option 2: Using Uvicorn
-uvicorn backend.main:app --reload --host 0.0.0.0 --port 8000
-```
-
-API will be available at: `http://localhost:8000`
-
-### Step 4: Start Frontend
-
-```bash
-# In a new terminal
-cd frontend
 npm start
 ```
 
-Dashboard will open at: `http://localhost:3000`
+---
 
-## API Endpoints
+## Complete Data Pipeline
 
-### Core Endpoints
+```bash
+pip install requests pandas yfinance tqdm joblib
 
-| Method | Endpoint             | Description |
-|--------|----------------------|-------------|
-| GET | `/`                  | Health check |
-| GET | `/assets`            | List all available coins |
-| GET | `/predict/{assets}`  | Get price predictions |
-| GET | `/live/{assets}`       | Get current live price |
-| GET | `/risk/{assets}`       | Get risk metrics |
-| GET | `/explain/{assets}`    | Get SHAP explanations |
-| GET | `/importance/{assets}` | Get feature importance |
-| POST | `/retrain/{assets}`    | Retrain model for specific coin |
-| POST | `/retrain-all`       | Retrain entire model |
-
-
-
-
-### Example Response
-
-```json
-{
-  "coin": "bitcoin",
-  "q10": 45230.50,
-  "q50": 48500.75,
-  "q90": 52100.25,
-  "current_price": 47800.00,
-  "confidence": 78.5
-}
+python fetch_data.py
+python fetch_indian_market_data.py
+python fetch_metals_data.py
+python add_metals_to_encoder.py
+python verify_data.py
 ```
 
+---
+
+## Data Verification
+
+```bash
+python verify_data.py
+```
+
+Checks:
+
+* Data freshness (< 7 days)
+* Missing values
+* Unrealistic prices
+* File integrity
+
+---
 
 ## Model Details
 
 ### Architecture
 
-The system uses a **Transformer-based architecture** with the following components:
+* Transformer encoder blocks
+* Multi-head attention
+* Global pooling
+* Three output heads (Q10, Q50, Q90)
 
-1. **Input Layer**: Price sequences (30 timesteps) + coin embeddings
-2. **Transformer Blocks**: Multi-head attention with feedforward networks
-3. **Pooling Layer**: Global average pooling
-4. **Output Heads**: Three separate heads for quantile predictions
-
-### Quantile Regression
-
-The model predicts three quantiles:
-- **Q10 (Conservative)**: 10th percentile - pessimistic scenario
-- **Q50 (Expected)**: 50th percentile - median prediction
-- **Q90 (Optimistic)**: 90th percentile - optimistic scenario
-
-### Loss Function
-
-Custom quantile loss for each output:
+### Quantile Loss
 
 ```python
 def quantile_loss(q):
@@ -228,106 +255,75 @@ def quantile_loss(q):
 
 ### Training Configuration
 
-- **Sequence Length**: 30 days
-- **Batch Size**: 256
-- **Epochs**: 20 (with early stopping)
-- **Optimizer**: Adam (lr=0.001)
-- **Regularization**: Dropout (0.1) + Layer Normalization
+* Sequence length: 30 days
+* Batch size: 256
+* Epochs: 20 (early stopping)
+* Optimizer: Adam
+* Dropout: 0.1
 
-## Risk Metrics
+---
 
-The system calculates comprehensive risk metrics:
+## API Endpoints
 
-- **VaR (Value at Risk)**: Maximum expected loss at 95% confidence
-- **CVaR (Conditional VaR)**: Expected loss beyond VaR threshold
-- **Volatility**: Annualized standard deviation of returns
-- **Sharpe Ratio**: Risk-adjusted return metric
-- **Maximum Drawdown**: Largest peak-to-trough decline
+| Method | Endpoint           | Description      |
+| ------ | ------------------ | ---------------- |
+| GET    | `/`                | Health check     |
+| GET    | `/assets`          | List assets      |
+| GET    | `/predict/{asset}` | Price prediction |
+| GET    | `/risk/{asset}`    | Risk metrics     |
+| GET    | `/explain/{asset}` | SHAP explanation |
+| POST   | `/retrain/{asset}` | Retrain asset    |
+| POST   | `/retrain-all`     | Retrain model    |
 
-## Configuration
+---
 
-### Modify Data Collection
+## Example API Response
 
-Edit `backend/data/fetch_data.py`:
-
-```python
-# Fetch only top 100 coins
-DAYS = 30  # Historical days to fetch
-coins = get_all_coin_ids()[:100]  # Limit to 100 coins
+```json
+{
+  "asset": "RELIANCE",
+  "q10": 2480.50,
+  "q50": 2552.75,
+  "q90": 2631.20,
+  "confidence": 81.4
+}
 ```
 
-### Adjust Model Parameters
-
-Edit `backend/model/model.py`:
-
-```python
-model = build_transformer(
-    seq_len=30,        # Sequence length
-    num_coins=100,     # Number of coins
-    d_model=128,       # Model dimension
-    num_heads=4,       # Attention heads
-    ff_dim=256,        # Feedforward dimension
-    num_transformer_blocks=2,  # Transformer layers
-    dropout=0.1        # Dropout rate
-)
-```
-
-## Troubleshooting
-
-### Issue: Model not found
-```bash
-# Solution: Train the model first
-python backend/model/train_model.py
-```
-
-### Issue: API connection failed
-```bash
-# Solution: Check if backend is running
-curl http://localhost:8000/
-```
-
-### Issue: Frontend can't connect
-```bash
-# Solution: Update API URL in cryptoApi.js
-baseURL: "http://localhost:8000"
-```
-
-### Issue: Out of memory during training
-```python
-# Solution: Reduce batch size in train_model.py
-BATCH_SIZE = 128  # Instead of 256
-```
+---
 
 ## Deployment
 
-### Backend (Railway/Heroku)
+### Backend
+
+* Railway / Render / Heroku
 
 ```bash
-# Create Procfile
-web: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
+uvicorn backend.main:app --host 0.0.0.0 --port $PORT
 ```
 
-### Frontend (Vercel/Netlify)
+### Frontend
+
+* Vercel / Netlify
 
 ```bash
-# Build command
 npm run build
-
-# Output directory
-build/
 ```
 
-## Performance
+---
 
-- **Prediction Time**: < 100ms per coin
-- **Training Time**: ~30-60 minutes (depends on data size)
-- **API Response Time**: < 200ms
-- **Model Size**: ~50-100MB
+## Important Notes
 
+* Always run `verify_data.py` before training
+* Respect CoinGecko rate limits
+* Use weekly data refresh for Indian markets
+* Reduce batch size if memory issues occur
+
+---
 
 ## Acknowledgments
 
-- [CoinGecko API](https://www.coingecko.com/en/api) for cryptocurrency data
-- [TensorFlow](https://www.tensorflow.org/) for deep learning framework
-- [FastAPI](https://fastapi.tiangolo.com/) for the web framework
-- [React](https://reactjs.org/) for the frontend framework
+* CoinGecko API
+* Yahoo Finance
+* TensorFlow
+* FastAPI
+* React
